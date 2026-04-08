@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>はじめの一歩</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <style>
+        /* 【CSS】見た目とデザイン */
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+            text-align: center;
+        }
+        .section {
+            min-height: 100vh; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box; /* 画面はみ出し防止 */
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px); 
+            transition: opacity 1.5s ease, transform 1.5s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        h1 {
+            font-size: 1.5rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        .swiper {
+            width: 100%;
+            max-width: 350px;
+            height: 250px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 【追加】リンクボタンのデザイン */
+        .btn {
+            display: block; /* ボタンを縦に並べる */
+            padding: 15px 20px;
+            border-radius: 30px; /* 角を丸くする */
+            text-decoration: none; /* リンクの下線を消す */
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 15px; /* ボタン同士の隙間 */
+            transition: transform 0.2s; /* 押したときのアニメーション */
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .btn:active {
+            transform: scale(0.95); /* タップすると少しへこむ */
+        }
+        .btn-insta {
+            /* インスタ風のグラデーションカラー */
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            color: white;
+        }
+        .btn-home {
+            background-color: white;
+            color: #333;
+            border: 2px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="section">
+        <h1 class="fade-in">一歩踏み出すことの<br>素晴らしさを、<br>あなたはもう知っている。</h1>
+        <p class="fade-in" style="font-size: 0.9rem; color: #888;">↓ スクロール ↓</p>
+    </div>
+
+    <div class="section">
+        <h1 class="fade-in">実は、このWebサイト...<br>あなたにも作れます。</h1>
+    </div>
+
+    <div class="section">
+        <h1 class="fade-in" style="margin-bottom: 30px;">私たちの活動記録</h1>
+        <div class="swiper mySwiper fade-in">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="https://picsum.photos/400/300?random=1" alt="活動写真1"></div>
+                <div class="swiper-slide"><img src="https://picsum.photos/400/300?random=2" alt="活動写真2"></div>
+                <div class="swiper-slide"><img src="https://picsum.photos/400/300?random=3" alt="活動写真3"></div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+
+    <div class="section" style="background-color: #111; color: white;">
+        <h1 class="fade-in" style="font-size: 2rem; margin-bottom: 40px;">ここではなんだってできる！</h1>
+        
+        <div class="fade-in" style="width: 100%; max-width: 300px;">
+            <a href="#" class="btn btn-insta">Instagramを見る</a>
+            <a href="#" class="btn btn-home">公式ホームへ</a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        });
+        const fadeElements = document.querySelectorAll('.fade-in');
+        fadeElements.forEach(el => observer.observe(el));
+
+        const swiper = new Swiper(".mySwiper", {
+            loop: true,
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+        });
+    </script>
+</body>
+</html>
